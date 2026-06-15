@@ -12,6 +12,7 @@ const app = express(); // Inicializamos la aplicación Express.
 app.use(cors()); // Habilitamos CORS.
 app.use(express.json()); // Esto significa que cuando llegue un JSON, lo convertimos en un objeto JavaScript.
 
-app.use('/api/analizar', analizadorRutas); // Cuando alguien visite esta ruta, el programa va a buscar la lógica dentro del archivo analizadorRutas.
+// Cuando alguien visite esta ruta, el programa va a buscar la lógica dentro del archivo analizadorRutas.
+app.use('/api/analizar', analizadorRutas);
 
 export default app; // Exportamos la aplicación para que pueda usarla el servidor.
