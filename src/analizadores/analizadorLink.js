@@ -1,6 +1,4 @@
-// Acá tenemos que programar la función asincrona extraerLinks y exportarla.
+// Crear la función para extraer las links de la página, utilizando Cheerio para analizar el HTML, recorrer
+// todas las etiquetas <a> y obtener sus atributos href, text y target, devolviendo un array de objetos con esta información.
 
-export async function extraerLinks(page) {
-  // Programar la función la cual extrae los links de la página, convierte la colección en un array, lo recorremos y convertimos su formato
-  // en una formas más legible.
-}
+export function extraerLinks($) {}

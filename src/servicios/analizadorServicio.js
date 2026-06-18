@@ -1,3 +1,5 @@
+import * as cheerio from 'cheerio';
+
 import { crearNavegador } from './navegadorServicio.js';
 
 import { extraerImagenes } from '../analizadores/analizadorImagen.js';
@@ -23,15 +25,23 @@ export async function analizarWebsite(url) {
     timeout: 30000,
   });
 
-  const meta = await extraerMeta(page); // Obtenemos título, descripción, idioma.
+  // Obtenemos el HTML renderizado por puppeteer, esto es importante para poder analizar el DOM completo.
+  const html = await page.content();
 
-  const images = await extraerImagenes(page); // Obtenemos todas las imágenes.
+  // Creamos una única instancia de Cheerio.
+  const $ = cheerio.load(html);
 
-  const links = await extraerLinks(page); // Obtenermos todos los enlaces.
+  // Analizadores que utilizan Cheerio.
 
-  const technologies = await detectorTecnologias(page); // Intentamos detectar frameworks, tecnologías.
+  const meta = extraerMeta($); // Obtenemos título, descripción, idioma.
 
-  const metrics = await obtenerMetricas(page); // Obtenemos las métricas del DOM.
+  const images = extraerImagenes($); // Obtenemos todas las imágenes.
+
+  const links = extraerLinks($); // Obtenermos todos los enlaces.
+
+  const technologies = detectorTecnologias($); // Intentamos detectar frameworks, tecnologías.
+
+  const metrics = obtenerMetricas($); // Obtenemos las métricas del DOM.
 
   const screenshot = await tomarScreenshot(page, Date.now()); // Generamos los screenshots.
 

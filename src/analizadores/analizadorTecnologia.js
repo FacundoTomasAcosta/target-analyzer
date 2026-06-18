@@ -1,5 +1,3 @@
-// Acá tenemos que programar la función asincrona detectorTecnologias y exportarla.
+// Crear la función para extraer las tecnologías utilizadas en la página.
 
-export async function detectorTecnologias(page) {
-  // Programar la función que detecta qué tecnologías utiliza la página.
-}
+export function detectarTecnologias($) {}

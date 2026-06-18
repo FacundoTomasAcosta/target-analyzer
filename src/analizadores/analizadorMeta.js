@@ -1,5 +1,3 @@
-// Acá tenemos que programar la función asincrona extraerMeta y exportarla.
+// Crear la función para extraer el meta de la página. title, description, keywords, language y favicon.
 
-export async function extraerMeta(page) {
-  // Programar la función la cual extrae la información general, como el titulo, la descripción y el language : <html lang="es">, por ejemplo
-}
+export function extraerMeta($) {}
