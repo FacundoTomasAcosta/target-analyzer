@@ -1,3 +1,3 @@
 // Crear la función para extraer las tecnologías utilizadas en la página.
 
-export function detectarTecnologias($) {}
+export function detectorTecnologias($) {}

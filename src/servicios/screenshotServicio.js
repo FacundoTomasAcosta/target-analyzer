@@ -1,6 +1,6 @@
 // Importamos los módulos fs y path.
 // File System nos sirve para interactuar con el sistema de archivos del servidor o de la computadora local, ya que vamos a estar guardando los archivos de los screenshots.
-// Path nos sirve para unir y normalizar rutas de archivos o carpetas adaptándose al sistema operativo donde se ejecutre el proyecto.
+// Path nos sirve para unir y normalizar rutas de archivos o carpetas adaptándose al sistema operativo donde se ejecute el proyecto.
 
 import fs from 'fs';
 import path from 'path';
