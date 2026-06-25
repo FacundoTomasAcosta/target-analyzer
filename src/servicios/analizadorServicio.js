@@ -14,6 +14,8 @@ import { obtenerMetricas } from '../analizadores/analizadorMetricas.js';
 
 import { tomarScreenshot } from './screenshotServicio.js';
 
+import { calcularSEOScore } from '../analizadores/analizadorSEO.js';
+
 export async function analizarWebsite(url) {
   const browser = await crearNavegador(); // Abrimos Chromium.
 
@@ -43,6 +45,8 @@ export async function analizarWebsite(url) {
 
   const metrics = obtenerMetricas($); // Obtenemos las métricas del DOM.
 
+  const seo = calcularSEOScore($); // Calculamos el SEO Score.
+
   const screenshot = await tomarScreenshot(page, Date.now()); // Generamos los screenshots.
 
   await browser.close(); // Cerramos el Chromium, es importante para poder liberar memoria.
@@ -60,6 +64,8 @@ export async function analizarWebsite(url) {
     technologies,
 
     metrics,
+
+    seo,
 
     screenshot,
   };

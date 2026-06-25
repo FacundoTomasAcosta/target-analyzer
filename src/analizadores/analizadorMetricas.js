@@ -1,4 +1,19 @@
-// Crear la función para extraer las métricas de la página, totalImages, totalLinks, totalScripts, totalStylesheets,
-// forms, tables y paragraphs.
+// Exportamos la función obtenerMetricas
 
-export function obtenerMetricas($) {}
+export function obtenerMetricas($) {
+  return {
+    totalImages: $('img').length,
+
+    totalLinks: $('a').length,
+
+    totalScripts: $('script').length,
+
+    totalStylesheets: $('link[rel="stylesheet"]').length,
+
+    forms: $('form').length,
+
+    tables: $('table').length,
+
+    paragraphs: $('p').length,
+  };
+}
