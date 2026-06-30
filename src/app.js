@@ -6,6 +6,7 @@ import cors from 'cors';
 
 // Importamos las rutas relacionadas con el análisis.
 import analizadorRutas from './rutas/analizadorRutas.js';
+import historialRuta from './rutas/historialRuta.js';
 
 const app = express(); // Inicializamos la aplicación Express.
 
@@ -14,5 +15,6 @@ app.use(express.json()); // Esto significa que cuando llegue un JSON, lo convert
 
 // Cuando alguien visite esta ruta, el programa va a buscar la lógica dentro del archivo analizadorRutas.
 app.use('/api/analizar', analizadorRutas);
+app.use('/api/historial', historialRuta);
 
 export default app; // Exportamos la aplicación para que pueda usarla el servidor.

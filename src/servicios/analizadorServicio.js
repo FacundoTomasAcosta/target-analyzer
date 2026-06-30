@@ -16,7 +16,13 @@ import { tomarScreenshot } from './screenshotServicio.js';
 
 import { calcularSEOScore } from '../analizadores/analizadorSEO.js';
 
+import { guardarAnalisis } from './historialServicio.js';
+
+import crypto from 'crypto';
+
 export async function analizarWebsite(url) {
+  const inicio = Date.now();
+
   const browser = await crearNavegador(); // Abrimos Chromium.
 
   const page = await browser.newPage(); // Abrimos una pestaña.
@@ -45,15 +51,23 @@ export async function analizarWebsite(url) {
 
   const metrics = obtenerMetricas($); // Obtenemos las métricas del DOM.
 
-  const seo = calcularSEOScore($); // Calculamos el SEO Score.
+  const seoScore = calcularSEOScore($); // Calculamos el SEO Score.
 
   const screenshot = await tomarScreenshot(page, Date.now()); // Generamos los screenshots.
 
-  await browser.close(); // Cerramos el Chromium, es importante para poder liberar memoria.
+  const tiempoAnalisis = Date.now() - inicio;
 
   // Construímos el JSON final.
-  return {
+  const resultado = {
+    id: crypto.randomUUID(),
+
+    fecha: new Date().toISOString(),
+
+    tiempoAnalisis,
+
     url,
+
+    dominio: new URL(url).hostname,
 
     ...meta,
 
@@ -65,8 +79,14 @@ export async function analizarWebsite(url) {
 
     metrics,
 
-    seo,
+    seoScore,
 
     screenshot,
   };
+
+  await browser.close(); // Cerramos el Chromium, es importante para poder liberar memoria.
+
+  await guardarAnalisis(resultado);
+
+  return resultado;
 }
