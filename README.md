@@ -16,6 +16,7 @@ El objetivo principal es desarrollar una herramienta capaz de:
 - Realizar auditorías SEO básicas.
 - Generar capturas visuales del sitio.
 - Proporcionar una API consumible por aplicaciones frontend.
+- Guardar en un historial la información de las URL visitadas.
 
 ---
 
@@ -74,7 +75,8 @@ En este proyecto el scraper:
 3. Obtiene el HTML renderizado.
 4. Analiza su contenido.
 5. Genera métricas e información estructurada.
-6. Devuelve los resultados en formato JSON.
+6. Guarda la información en un historial.
+7. Devuelve los resultados en formato JSON.
 
 ---
 
@@ -109,6 +111,8 @@ Analizadores
    │
    ▼
 Respuesta JSON
+
+
 ```
 
 ## Flujo Detallado
@@ -124,7 +128,8 @@ Respuesta JSON
 9. Los analizadores extraen información específica.
 10. Se genera un screenshot.
 11. Se construye la respuesta final.
-12. El controlador devuelve el resultado al cliente.
+12. Se guarda en el historial.
+13. El controlador devuelve el resultado al cliente.
 
 ---
 
@@ -143,12 +148,15 @@ src/
 │
 ├── controladores/
 │   └── analizadorControlador.js
+│   └── historialControlador.js
 │
 ├── rutas/
 │   └── analizadorRutas.js
+│   └── historialRuta.js
 │
 ├── servicios/
 │   ├── analizadorServicio.js
+│   ├── historialServicio.js
 │   ├── navegadorServicio.js
 │   └── screenshotServicio.js
 │
@@ -156,10 +164,10 @@ src/
 │   ├── codigoErrores.js
 │   └── manejoErrores.js
 │
-├── screenshots/
-│
 ├── app.js
 └── server.js
+screenshots/
+historial/
 ```
 
 ---
@@ -225,18 +233,18 @@ El sistema genera una puntuación entre 0 y 100 puntos.
 
 ## Criterios Evaluados
 
-| Criterio | Puntaje |
-|-----------|---------:|
-| Title | 15 |
-| Meta Description | 15 |
-| H1 | 15 |
-| Language (lang) | 10 |
-| Viewport | 10 |
-| Favicon | 5 |
-| Canonical | 10 |
-| Robots | 10 |
-| Imágenes con alt | 10 |
-| Total | 100 |
+| Criterio         | Puntaje |
+| ---------------- | ------: |
+| Title            |      15 |
+| Meta Description |      15 |
+| H1               |      15 |
+| Language (lang)  |      10 |
+| Viewport         |      10 |
+| Favicon          |       5 |
+| Canonical        |      10 |
+| Robots           |      10 |
+| Imágenes con alt |      10 |
+| Total            |     100 |
 
 ---
 
@@ -265,12 +273,12 @@ El sistema genera una puntuación entre 0 y 100 puntos.
 
 ## Interpretación
 
-| Puntaje | Evaluación |
-|----------|-------------|
-| 90 - 100 | Excelente |
-| 70 - 89 | Bueno |
-| 50 - 69 | Mejorable |
-| 0 - 49 | Deficiente |
+| Puntaje  | Evaluación |
+| -------- | ---------- |
+| 90 - 100 | Excelente  |
+| 70 - 89  | Bueno      |
+| 50 - 69  | Mejorable  |
+| 0 - 49   | Deficiente |
 
 ---
 
@@ -302,6 +310,10 @@ Genera capturas de pantalla del sitio analizado.
 ### analizadorServicio.js
 
 Coordina todo el proceso de análisis.
+
+### historialServicio.js
+
+Se encarga de guardar la información de las URL visitadas.
 
 ---
 
@@ -344,13 +356,13 @@ El proyecto utiliza ES Modules mediante:
 Esto permite utilizar:
 
 ```javascript
-import express from "express";
+import express from 'express';
 ```
 
 en lugar de:
 
 ```javascript
-const express = require("express");
+const express = require('express');
 ```
 
 ## Ventajas
@@ -374,7 +386,6 @@ Aunque sigue siendo compatible, ES Modules es actualmente el estándar recomenda
 La utilización de ES Modules permite mantener el proyecto alineado con las prácticas modernas del ecosistema JavaScript.
 
 ---
-
 
 # Servicio de Screenshots
 
