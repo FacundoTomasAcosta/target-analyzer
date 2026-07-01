@@ -80,6 +80,168 @@ En este proyecto el scraper:
 
 ---
 
+# 🚀 Instalación y ejecución
+
+## Requisitos
+
+Antes de ejecutar el proyecto es necesario contar con:
+
+- Node.js 18 o superior
+- npm
+- Git (opcional)
+
+Para verificar que Node.js se encuentra instalado:
+
+```bash
+node -v
+```
+
+Para verificar npm:
+
+```bash
+npm -v
+```
+
+---
+
+## Clonar el repositorio
+
+```bash
+git clone https://github.com/FacundoTomasAcosta/target-analyzer.git
+
+cd target-analyzer
+```
+
+---
+
+## Instalar dependencias
+
+Instalar todas las dependencias del proyecto:
+
+```bash
+npm install
+```
+
+Entre las principales dependencias utilizadas se encuentran:
+
+- Express
+- Puppeteer
+- Cheerio
+- Cors
+- Dotenv
+
+---
+
+## Ejecutar el servidor
+
+Modo desarrollo:
+
+```bash
+npm run dev
+```
+
+o bien:
+
+```bash
+npm start
+```
+
+Si la aplicación inicia correctamente se visualizará el siguiente mensaje:
+
+```text
+Servidor iniciado en puerto 3000
+```
+
+La API quedará disponible en:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 📡 Endpoints disponibles
+
+## Analizar un sitio web
+
+**POST**
+
+```
+/api/analizar
+```
+
+### Body
+
+```json
+{
+  "url": "https://github.com"
+}
+```
+
+Esta petición realiza automáticamente:
+
+- Renderizado completo mediante Puppeteer.
+- Obtención del HTML.
+- Análisis del DOM utilizando Cheerio.
+- Extracción de metadatos.
+- Extracción de imágenes.
+- Extracción de enlaces.
+- Detección de tecnologías.
+- Cálculo del SEO Score.
+- Obtención de métricas.
+- Generación de un screenshot.
+- Almacenamiento automático del análisis en el historial.
+
+---
+
+## Obtener el historial de análisis
+
+**GET**
+
+```
+/api/historial
+```
+
+Devuelve todos los análisis almacenados.
+
+---
+
+## Obtener un análisis específico
+
+**GET**
+
+```
+/api/historial/:nombreArchivo
+```
+
+Ejemplo:
+
+```
+/api/historial/2026-06-28_20-15-33_github.com.json
+```
+
+---
+
+## Eliminar un análisis
+
+**DELETE**
+
+```
+/api/historial/:nombreArchivo
+```
+
+---
+
+## Eliminar todo el historial
+
+**DELETE**
+
+```
+/api/historial
+```
+
+---
+
 # Flujo General del Sistema
 
 ```text

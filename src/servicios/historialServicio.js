@@ -78,7 +78,10 @@ export async function obtenerHistorial() {
 
       title: analisis.title,
 
-      seoScore: analisis.seo.score,
+      seo: {
+        score: analisis.seoScore.score,
+        checks: analisis.seoScore.checks,
+      },
 
       cantidadImagenes: analisis.images.length,
 
